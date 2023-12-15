@@ -3,7 +3,7 @@ import React from 'react'
 const MainSection = () => {
   return (
     <div className="flex justify-center items-center flex-col text-white mt-20">
-      <h2 className="text-5xl font-bold text-center leading-[55px]">
+      <h2 className="md:text-5xl text-3xl font-bold text-center leading-[50px] md:leading-[55px]">
         Empowering Nigerian Freelancers and Entrepreneurs
         <br /> <span className='text-green-500'>Nameless </span>Redefining Digital Collaboration
       </h2>
