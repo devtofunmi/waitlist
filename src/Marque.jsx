@@ -1,10 +1,10 @@
 import React from 'react'
-import Marquee from "react-marquee-line";
+import Marquee from "react-fast-marquee";
 
 const Marque = () => {
   return (
     <Marquee>
-        <div className='flex'>
+        <div className='flex text-white'>
       <p>Programming and Tech</p>
       <p>Website Design</p>
       <p>Graphic Design</p>
