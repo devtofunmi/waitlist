@@ -5,7 +5,7 @@ const Marque = () => {
   return (
     <Marquee>
         <div className='flex text-white justify-between gap-10 md:text-2xl mt-10'>
-      <p>Programming and Tech</p>
+      <p className='text-white'>Programming and Tech</p>
       <p>Website Design</p>
       <p>Graphic Design</p>
       <p>Logo Design</p>
