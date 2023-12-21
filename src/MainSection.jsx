@@ -11,11 +11,11 @@ const MainSection = () => {
         Connecting Talent with Opportunity Transforming the Gig Economy
         Experience in Nigeria
       </p>
-      <div className="flex justify-between rounded-lg border-[2px] w-[380px] h-[50px] border-white mt-5">
+      <div className="flex justify-between rounded-lg border-[2px] w-[320px] md:w-[380px] h-[50px] border-white mt-5">
         <input
           placeholder="your email"
           className="bg-transparent p-2"
-          type="text"
+          type="email"
         />
         <button className="bg-white text-black p-1 font-bold">
           Join Waitlist

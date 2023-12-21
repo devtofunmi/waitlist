@@ -8,8 +8,8 @@ function App() {
   return (
     <div className="h-screen w-full bg-black p-4">
       <Navbar />
-      <MainSection />
       <Marque />
+      <MainSection />
     </div>
   );
 }
