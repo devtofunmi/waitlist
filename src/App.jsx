@@ -6,7 +6,7 @@ import Marque from './Marque';
 
 function App() {
   return (
-    <div className="h-screen w-full bg-black p-4">
+    <div className=" p-4">
       <Navbar />
       <Marque />
       <MainSection />

@@ -4,7 +4,7 @@ import Marquee from "react-fast-marquee";
 const Marque = () => {
   return (
     <Marquee>
-        <div className='flex text-white justify-between gap-10 md:text-2xl mt-10'>
+        <div className='flex text-white justify-between gap-10 text-2xl mt-10'>
       <p className='text-white'>Programming and Tech</p>
       <p>Website Design</p>
       <p>Graphic Design</p>
