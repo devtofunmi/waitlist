@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 const Success = ({success,onClose}) => {
   return (
@@ -6,7 +6,7 @@ const Success = ({success,onClose}) => {
       <div className="md:w-[320px] w-[200px] md:h-[120px] h-[100px] rounded-lg  bg-green-500 text-white ">
         <div className="flex justify-end p-2">
           <button onClick={onClose}>
-            <p>close </p>
+            <p>X</p>
           </button>
         </div>
         <div className="flex justify-center items-center  font-bold md:text-[20px] text-[12px] ">
