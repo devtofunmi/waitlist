@@ -1,47 +1,59 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Success from './Success';
 
 const MainSection = ({success}) => {
-   const [email, setEmail] = useState("");
-   const [error, setError] = useState("");
-   const [successMessage, setSuccessMessage] = useState("");
-   const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
     setLoading(true);
-    try {
 
+    try {
       if (!email) {
-        setError("Enter your email");
-        setTimeout(() => {
-         setError();
-        }, 1000);
-        console.log("Enter your email");
-      } else {
-        setSuccessMessage("Email submitted successfully");
+        setError("Enter your email address");
          setTimeout(() => {
-           setSuccessMessage();
-         }, 1500);
-        console.log("Email submitted successfully");
+           setError("");
+         }, 3000);
+      } else {
+        const response = await fetch("/addtowaitlist", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          setSuccessMessage(result.message);
+        } else {
+          const errorResult = await response.json();
+          setError(`Error: ${errorResult.error}`);
+          setSuccessMessage("Email submitted successfully");
+            setTimeout(() => {
+              setSuccessMessage("");
+            }, 3000);
+        }
       }
     } catch (error) {
       console.error("An error occurred:", error);
-        setError("An error occurred");
+      setError("An error occurred");
     } finally {
       setLoading(false);
     }
   };
-   useEffect(() => {
-    AOS.init({ duration: 1000 });
-  }, []);
 
   const handleClose = () => {
-    // Implement logic to close the success message
     setSuccessMessage("");
   };
 
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
 
   return (
     <div>
@@ -68,38 +80,44 @@ const MainSection = ({success}) => {
 
         <div
           data-aos="fade-left"
-          className="md:w-[400px] md:h-[150px] w-[300px] h-[200px] bg-[#282a3e] flex flex-col items-center rounded-lg mt-10"
+          className="md:w-[800px] h-fit py-5 w-full px-5 md:px-0 shadow-md bg-[#282a3e] flex flex-col items-center rounded-lg mt-10"
         >
-          <h1 className="text-2xl text-white font-bold mt-5">
-            JOIN THE WAITLIST
-          </h1>
-          {error && (
-            <div className="flex justify-center  items-center text-white  md:text-[15px] text-[12px] ">
-              <div className="flex justify-between items-center text-red-500">
-                <p>{error}</p>
+          <div>
+            {error && (
+              <div className="flex justify-center  items-center text-white  md:text-[15px] text-[12px] ">
+                <div className="flex justify-between items-center text-red-500">
+                  <p>{error}</p>
+                </div>
               </div>
+            )}
+            <div className="md:w-[380px] w-[300px] flex justify-center flex-col items-center">
+              <h1 className="text-2xl text-white font-bold mt-5">
+                Coming Soon!
+              </h1>
+              <p className="mt-2 text-lg mt-5 text-center">
+                Kindly allow us the necessary time to finalize our work. To
+                receive notification of its completion, we invite you to join
+                our waitlist. Thank you for your patience and understanding.
+              </p>
+              <input
+                placeholder="Enter Address"
+                className="bg-gray-500 rounded-md text-white p-2 mt-5 w-full placeholder-white"
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <button
+                onClick={handleSubmit}
+                className="bg-green-500 mt-5 rounded-md py-2 text-white px-5 font-bold"
+                disabled={loading}
+              >
+                {loading ? <p>...</p> : <p>Join the waitlist</p>}
+              </button>
             </div>
-          )}
-          <div className="flex justify-between rounded-full border-[2px] w-[280px] md:w-[370px] h-[50px] border-white mt-5 bg-white">
-            <input
-              placeholder="your email"
-              className="bg-transparent focus:border-transparent rounded-full p-2 w-full "
-              type="email"
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-            <button
-              onClick={handleSubmit}
-              className="bg-green-500 rounded-full text-white px-5 font-bold"
-            >
-              {loading ? <p>...</p> : <p>Join</p>}
-            </button>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default MainSection;
